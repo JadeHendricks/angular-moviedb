@@ -1,0 +1,55 @@
+<div class="overlay">
+  <div class="modal modalAuth">
+      <div class="modalAuth__tabs">
+          <button class="tab active">Login</button>
+          <button class="tab">Sign up</button>
+      </div>
+      <div class="modalAuth__padding">
+          <p class="modalAuth__slug">Enter your email and password to <strong>sign in</strong></p>
+      </div>
+      <div class="modalForm inputbox">
+          <div class="modalForm__signup">
+              <div class="inputbox__box">
+                  <label id="signup_email" class="inputbox__label">Email *</label>
+                  <input type="text" name="signup_email" class="inputbox__input" placeholder="Email">
+                  <span class="auth-label">this is an auth message</span>
+              </div>
+              <div class="inputbox__box">
+                  <label id="signup_password" class="inputbox__label">Password *</label>
+                  <input type="text" name="signup_password" class="inputbox__input" placeholder="Password">
+                  <span class="auth-label">this is an auth message</span>
+                  <svg class="modalForm__icon">
+                      <use xlink:href="assets/sprite.svg#icon-eye"></use>
+                  </svg>
+              </div>
+          </div>
+          <div class="modalForm__login">
+              <div class="inputbox__box">
+                  <label id="login_email" class="inputbox__label">Email *</label>
+                  <input type="text" name="login_email" class="inputbox__input" placeholder="Email">
+                  <span class="auth-label">this is an auth message</span>
+              </div>
+              <div class="inputbox__box">
+                  <label id="login_password" class="inputbox__label">Password *</label>
+                  <input type="password" name="login_password" class="inputbox__input" placeholder="Password">
+                  <span class="auth-label">this is an auth message</span>
+                  <svg class="modalForm__icon">
+                      <use xlink:href="assets/sprite.svg#icon-eye"></use>
+                  </svg>
+              </div>
+              <div class="inputbox__box borderTop0">
+                  <label id="login_confirmpassword" class="inputbox__label">Confirm Password *</label>
+                  <input type="password" name="login_confirmpassword" class="inputbox__input" placeholder="Confirm Password">
+                  <span class="auth-label">this is an auth message</span>
+                  <svg class="modalForm__icon">
+                      <use xlink:href="assets/sprite.svg#icon-eye"></use>
+                  </svg>
+              </div>
+          </div>
+          <div class="modalAuth__padding">
+              <button class="button button--green" type="submit" disabled>Login</button>
+              <span class="auth-label paddingBottom30">this is an auth message</span>
+          </div>
+      </div>
+  </div>
+</div>
