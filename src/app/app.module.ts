@@ -15,6 +15,7 @@ import { ActorSummaryComponent } from './components/informational/actor-summary/
 import { SearchResultsComponent } from './components/informational/search-results/search-results.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
+import { SwitchTabsComponent } from './components/layouts/switch-tabs/switch-tabs.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ReviewsComponent } from './components/reviews/reviews.component';
     SearchResultsComponent,
     RatingComponent,
     ReviewsComponent,
+    SwitchTabsComponent,
   ],
   imports: [
     BrowserModule
