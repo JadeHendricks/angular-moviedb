@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/layouts/header/header.component';
@@ -18,6 +19,10 @@ import { ReviewsComponent } from './components/reviews/reviews.component';
 import { SwitchTabsComponent } from './components/layouts/switch-tabs/switch-tabs.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { MovieService } from './services/movie/movie.service';
+import { SeriesService } from './services/series/series.service';
+import { CastService } from './services/cast/cast.service';
+
 
 @NgModule({
   declarations: [
@@ -40,9 +45,10 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [MovieService, SeriesService, CastService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
