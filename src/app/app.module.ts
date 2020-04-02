@@ -17,6 +17,7 @@ import { RatingComponent } from './components/rating/rating.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { SwitchTabsComponent } from './components/layouts/switch-tabs/switch-tabs.component';
 import { AppRoutingModule } from './app-routing.module';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { AppRoutingModule } from './app-routing.module';
     RatingComponent,
     ReviewsComponent,
     SwitchTabsComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

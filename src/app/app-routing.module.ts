@@ -4,12 +4,14 @@ import { MainContentComponent } from './components/layouts/main-content/main-con
 import { MovieSummaryComponent } from './components/informational/movie-summary/movie-summary.component';
 import { ActorSummaryComponent } from './components/informational/actor-summary/actor-summary.component';
 import { SearchResultsComponent } from './components/informational/search-results/search-results.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   { path: "", component: MainContentComponent },
   { path: "moviesummary/:id", component: MovieSummaryComponent },
   { path: "actorsummary/:id", component: ActorSummaryComponent },
   { path: "searchresults/:query", component: SearchResultsComponent },
+  { path: "**", component: NotFoundComponent }
 ];
 
 @NgModule({
