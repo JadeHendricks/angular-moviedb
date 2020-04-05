@@ -12,8 +12,4 @@ export class RatingComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  setRatingTheme(rating: number): string {
-    return rating < 5 ? "ratingholder ratingholder--red" : rating > 5 && rating < 7 ? "ratingholder ratingholder--orange" : "ratingholder";
-  }
-
 }

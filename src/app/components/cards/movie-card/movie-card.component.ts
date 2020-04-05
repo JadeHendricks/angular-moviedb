@@ -10,7 +10,6 @@ import { MovieService } from 'src/app/services/movie/movie.service';
 export class MovieCardComponent implements OnInit {
 
   @Input() content: any;
-  api_key: string = "e87f29ad6137f88242f3bcd9b94b1af7";
   trailerKey: string;
 
   constructor(private movieService: MovieService) { }

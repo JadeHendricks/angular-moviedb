@@ -1,6 +1,6 @@
-<header class="movie-header">
+<header class="movie-header" [style.background-image]="backgroundImageUrl ? backgroundImageUrl() : null">
   <div class="container-small">
-      <svg class="movie-header__playicon">
+      <svg class="movie-header__playicon" (click)="getTrailer(content?.id)">
           <use xlink:href="assets/sprite.svg#icon-play2"></use>
       </svg>
       <h4 class="movie-header__slug">Most Popular</h4>
@@ -10,13 +10,12 @@
               <div class="category__pill category__pill--large category__pill--white">Sci-fi</div>
           </div>
       </div>
-      <h1 class="movie-header__title">Made In America</h1>
-      <span class="movie-header__date">12 August 2020 &nbsp; | &nbsp; 240 mins</span>
+      <h1 class="movie-header__title">{{ content?.title }}</h1>
+      <span class="movie-header__date">{{ content?.release_date }}</span>
       <p class="movie-header__description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa aspernatur aliquam vitae magni officiis, 
-          ipsam at iste quis id praesentium iure, quibusdam adipisci quaerat fuga dolorum alias consequuntur, quam voluptatibus.
+        {{ content?.overview }}
       </p>
-      <button routerLink="/moviesummary" class="button button--green marginBottom20">View More</button>
-      <button class="marginLeft30 button button--green marginBottom20">Watch Trailer</button>
+      <button routerLink="/moviesummary/{{ content?.id }}" class="button button--green marginBottom20">View More</button>
+      <button class="marginLeft30 button button--green marginBottom20" (click)="getTrailer(content?.id)">Watch Trailer</button>
   </div>
 </header>
