@@ -1,3 +1,4 @@
-<div class="ratingholder">
-  <span class="ratingholder__number">8.6</span>
+<!-- <div class="ratingholder" [class.ratingholder--red]="rating < 5 " [class.ratingholder--orange]="rating > 5 && rating < 7"> -->
+<div class="ratingholder" [ngClass]="{'ratingholder--red': rating < 5, 'ratingholder--orange': rating > 5 && rating < 7 }">
+  <span class="ratingholder__number">{{ rating }}</span>
 </div>

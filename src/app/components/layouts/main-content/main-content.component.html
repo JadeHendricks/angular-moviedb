@@ -4,7 +4,9 @@
     <app-switch-tabs></app-switch-tabs>    
     <h3 class="movieSection__title">Comedies</h3>
     <div class="movieSection__titles">
-      <app-movie-card class="card movieCard"></app-movie-card>
+      <div class="card movieCard" *ngFor="let movie of intialMovies">
+        <app-movie-card [content]="movie"></app-movie-card>
+      </div>
     </div>
   </div>
 </section>

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Movie } from 'src/app/models/Movie';
+import { Series } from 'src/app/models/Series';
+import { MovieService } from 'src/app/services/movie/movie.service';
 
 @Component({
   selector: 'app-movie-card',
@@ -6,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MovieCardComponent implements OnInit {
 
-  constructor() { }
+  @Input() content: any;
+  api_key: string = "e87f29ad6137f88242f3bcd9b94b1af7";
+  trailerKey: string;
+
+  constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {
   }
 
+  getTrailer(id: number): void {
+    this.movieService.getTrailer(id).subscribe(trailer => {
+      this.trailerKey = trailer.results[0].key
+      if (this.trailerKey) {
+        window.open(
+          `https://www.youtube.com/watch?v=${this.trailerKey}`,
+          `_blank`
+        );
+      }
+    });
+  }
 }

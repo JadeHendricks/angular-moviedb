@@ -1,12 +1,12 @@
 <div class="movieCard__image">
-    <img src="./assets/movie-poster.png" class="movieCard__imagesrc" />
+    <img src="https://image.tmdb.org/t/p/w500/{{content.poster_path}}" class="movieCard__imagesrc" />
 </div>
 <div class="movieCard__information">
-    <h5 class="movieCard__title">Where The Wild Things are headed this way</h5>
-    <app-rating></app-rating>
-    <p class="movieCard__date">12 August 2020</p>
+    <h5 class="movieCard__title">{{ content.title }}</h5>
+    <app-rating [rating]="content.vote_average"></app-rating>
+    <p class="movieCard__date">{{ content.release_date }}</p>
     <div class="movieCard__buttons">
-        <button routerLink="/moviesummary" class="button button--green button--skeleton">View More</button>
-        <button class="button button--green">Watch Trailer</button>
+    <button class="button button--green" (click)="getTrailer(content.id)">Watch Trailer</button>
+    <button routerLink="/moviesummary/{{ content.id }}" class="button button--green button--skeleton">View More</button>
     </div>
 </div>

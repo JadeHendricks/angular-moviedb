@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Series } from 'src/app/models/Series';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,8 @@ export class SeriesService {
 
   api_key: string = "e87f29ad6137f88242f3bcd9b94b1af7";
 
-  getInitialCardState(): Observable<any[]> {
-    return this.http.get<any[]>(`https://api.themoviedb.org/3/tv/on_the_air?api_key=${this.api_key}&language=en-US&page=1`);
+  getInitialCardState(): Observable<any> {
+    return this.http.get<any>(`https://api.themoviedb.org/3/tv/on_the_air?api_key=${this.api_key}&language=en-US&page=1`);
   }
 
   getMostPupularSeries(): Observable<{}> {
