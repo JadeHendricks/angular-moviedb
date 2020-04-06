@@ -3,8 +3,8 @@
 </div>
 <div class="movieCard__information">
     <h5 class="movieCard__title">{{ content?.title }}</h5>
-    <app-rating [rating]="content.vote_average"></app-rating>
-    <p class="movieCard__date">{{ content?.release_date }}</p>
+    <app-rating [rating]="content?.vote_average"></app-rating>
+    <p class="movieCard__date">Release date: {{ content?.release_date }}</p>
     <div class="movieCard__buttons">
     <button class="button button--green" (click)="getTrailer(content?.id)">Watch Trailer</button>
     <button routerLink="/moviesummary/{{ content?.id }}" class="button button--green button--skeleton">View More</button>

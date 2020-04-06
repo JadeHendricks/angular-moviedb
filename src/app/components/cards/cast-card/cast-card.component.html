@@ -1,7 +1,7 @@
 <div class="castCard__imageholder">
-    <img routerLink="/actorsummary" class="castCard__image" src="./assets/06_movie-profile-A_10.jpg" alt="Person" title="person">
+    <img routerLink="/actorsummary/{{ castMember?.id }}" style="cursor: pointer;" class="castCard__image" src="https://image.tmdb.org/t/p/w500/{{castMember?.profile_path}}" alt="Person" title="person">
 </div>
 <div class="castCard__info">
-    <h5 routerLink="/actorsummary" class="castCard__realname">Jamie Foxx</h5>
-    <span class="castCard__as">Bats</span>
+    <h5 routerLink="/actorsummary/{{ castMember?.id }}" class="castCard__realname" style="cursor: pointer;">{{ castMember?.name }}</h5>
+    <span class="castCard__as">{{ castMember?.character }}</span>
 </div>

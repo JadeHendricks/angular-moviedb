@@ -1,15 +1,10 @@
 <div class="reviews__review">
-  <app-rating></app-rating>
   <div class="reviews__title">
-      Dan Cederholm <br>
-      <span class="reviews__date">October 22, 2017</span>
+      {{ userReview?.author }} <br>
   </div>
-  <div class="reviews__slug">This is how movies should be made!</div>
   <div class="reviews__description">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Est obcaecati eos, 
-      assumenda itaque fugiat tenetur eius similique perspiciatis quo a, 
-      placeat excepturi ad officia pariatur?
-      <br>
-      <a class="reviews__link" href="#">See more &rarr;</a>
+    {{ contentTrimer(userReview?.content)}}
+    <br>
+    <a class="reviews__link" target="_blank" href="{{userReview?.url}}">See more &rarr;</a>
   </div>
 </div>
