@@ -42,12 +42,4 @@ export class MovieService {
   getSimilarMovies(id: string): Observable<any> {
     return this.http.get<any>(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=${this.api_key}&language=en-US&page=1`);
   }
-
-  getActor(id: string): Observable<any> {
-    return this.http.get<any>(`https://api.themoviedb.org/3/person/${id}?api_key=${this.api_key}&language=en-US`)
-  }
-
-  getCredits(id: string): Observable<any> {
-    return this.http.get<any>(`https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${this.api_key}&language=en-US`);
-  }
 }
