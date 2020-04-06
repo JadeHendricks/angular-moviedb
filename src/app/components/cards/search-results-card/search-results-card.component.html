@@ -1,10 +1,10 @@
 <div class="cardSearch__imageholder">
-  <img routerLink="/moviesummary" class="cardSearch__image" src="./assets/06_movie-profile-A_10.jpg" alt="">
+  <img routerLink="/moviesummary/{{ content?.id }}" class="cardSearch__image" src="https://image.tmdb.org/t/p/w500/{{content?.poster_path}}" title="{{ content?.title ? content?.title : content?.name }}" alt="{{ content?.title ? content?.title : content?.name }}">
 </div>
 <div class="cardSearch__info">
-  <app-rating></app-rating>
-  <h5 class="cardSearch__title" routerLink="/moviesummary">Shrek Two</h5>
+  <app-rating [rating]="content?.vote_average"></app-rating>
+  <h5 class="cardSearch__title" routerLink="/moviesummary/{{ content?.id }}">{{ content?.title ? content?.title : content?.name  }}</h5>
   <p class="cardSearch__description">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, enim ipsam laborum, 
+    {{ contentTrimer(content?.overview) }}
   </p>
 </div>

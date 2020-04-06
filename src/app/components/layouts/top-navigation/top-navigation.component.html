@@ -1,9 +1,9 @@
 <nav class="topnav">
-  <form class="searchForm">
+  <form class="searchForm" (submit)="onSubmit()">
       <svg class="searchForm__icon">
           <use xlink:href="assets/sprite.svg#icon-magnifying-glass"></use>
       </svg>
-      <input class="searchForm__input" type="search" name="search" placeholder="Search for Movies or TV Series" value="">
+      <input class="searchForm__input" type="search" name="search" placeholder="Search for Movies or TV Series" [(ngModel)]="query">
   </form>
   <div clas="userAuth">
       <div class="topnav__buttons">

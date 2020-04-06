@@ -39,4 +39,8 @@ export class SeriesService {
   getSimilarSeries(id: string): Observable<any[]> {
     return this.http.get<any[]>(`https://api.themoviedb.org/3/tv/${id}/similar?api_key=${this.api_key}&language=en-US&page=1`);
   }
+
+  searchSeries(query: string): Observable<any> {
+    return this.http.get<any>(`https://api.themoviedb.org/3/search/tv?api_key=${this.api_key}&query=${query}&language=en-US&page=1&include_adult=false`);
+  }
 }

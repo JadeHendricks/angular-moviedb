@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MovieService } from 'src/app/services/movie/movie.service';
+import { SeriesService } from 'src/app/services/series/series.service';
 
 @Component({
   selector: 'app-search-results',
@@ -7,10 +9,20 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SearchResultsComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  query: string;
+  searchMovies: any;
+  searchSeries: any;
+  searchedContent: any = [];
+
+  constructor(
+    private route: ActivatedRoute, 
+    private movieService: MovieService, 
+    private seriesService: SeriesService) { }
 
   ngOnInit(): void {
-    const query = this.route.snapshot.paramMap.get("query");
+    this.query = this.route.snapshot.paramMap.get("query");
+    this.movieService.searchMovies(this.query).subscribe(movie => this.searchedContent.push(...movie.results));
+    this.seriesService.searchSeries(this.query).subscribe(series => this.searchedContent.push(...series.results));
   }
 
 }

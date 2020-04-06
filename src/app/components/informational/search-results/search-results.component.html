@@ -1,8 +1,10 @@
 <section class="searchResults">
   <div class="container">
-      <h2 class="searchResults__title">Search results for <span>Shrek</span></h2>
+      <h2 class="searchResults__title">Search results for <span>{{ query }}</span></h2>
       <div class="searchResults__wrapper">
-        <app-search-results-card class="card cardSearch"></app-search-results-card>
+        <div class="card cardSearch"*ngFor="let searchedItem of searchedContent">
+          <app-search-results-card [content]="searchedItem"></app-search-results-card>
+        </div>
       </div>
   </div>
 </section>

@@ -42,4 +42,8 @@ export class MovieService {
   getSimilarMovies(id: string): Observable<any> {
     return this.http.get<any>(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=${this.api_key}&language=en-US&page=1`);
   }
+
+  searchMovies(query: string): Observable<any> {
+    return this.http.get<any>(`https://api.themoviedb.org/3/search/movie?api_key=${this.api_key}&query=${query}&language=en-US&page=1&include_adult=false`);
+  }
 }
