@@ -58,7 +58,7 @@
 
               <app-rating [rating]="movie?.vote_average"></app-rating>
 
-              <h2 class="movieMain__title">{{ movie?.title }} <span>{{ movie?.release_date }}</span></h2>
+              <h2 class="movieMain__title">{{ movie?.title }} <span>{{ movie?.release_date | date: 'dd-MM-yyyy' }}</span></h2>
               <div class="movieMain__storyline">
                   <h3 class="marginBottom10">Storyline</h3>
                   <p>{{ movie?.overview }}</p>

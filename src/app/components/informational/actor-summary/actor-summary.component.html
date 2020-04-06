@@ -27,7 +27,7 @@
 
                   <div class="misc__box">
                     <div class="movieDetails__title movieDetails__title--smaller">Date of Birth</div>
-                    <p class="misc__info">{{ actor?.birthday }}</p>
+                    <p class="misc__info">{{ actor?.birthday | date: 'dd/MM/yyyy' }}</p>
                   </div>
 
                   <div class="misc__box">

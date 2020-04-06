@@ -1,4 +1,4 @@
 <!-- <div class="ratingholder" [class.ratingholder--red]="rating < 5 " [class.ratingholder--orange]="rating > 5 && rating < 7"> -->
 <div class="ratingholder" [ngClass]="{'ratingholder--red': rating < 5, 'ratingholder--orange': rating > 5 && rating < 7 }">
-  <span class="ratingholder__number">{{ rating }}</span>
+  <span class="ratingholder__number">{{ rating?.toFixed(1) }}</span>
 </div>
