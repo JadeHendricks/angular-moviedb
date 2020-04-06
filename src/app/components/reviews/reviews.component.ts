@@ -13,7 +13,7 @@ export class ReviewsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  contentTrimer(copy: string) {
+  contentTrimer(copy: string): string {
     return copy.slice(0, 500) + "...";
   }
 
