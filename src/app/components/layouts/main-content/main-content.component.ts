@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from 'src/app/services/movie/movie.service';
-import { Movie } from 'src/app/models/Movie';
+import { Content } from 'src/app/models/Content';
 
 @Component({
   selector: 'app-main-content',
@@ -8,22 +8,22 @@ import { Movie } from 'src/app/models/Movie';
 })
 export class MainContentComponent implements OnInit {
 
-  intialMovies: any[];
-  mostPopularMovies: any[];
-  mostPopularMovie: any;
+  intialMovies: Content[];
+  mostPopularMovies: Content[];
+  mostPopularMovie: Content;
   
   constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {
     this.movieService.getInitialCardState().subscribe(movie => this.intialMovies = movie.results);
-    this.movieService.getMostPupularMovies().subscribe(movie => {
+    this.movieService.getMostPopularMovies().subscribe(movie => {
       this.mostPopularMovies = movie.results;
       this.setMostPopularMovie(this.mostPopularMovies);
     });
   }
 
-  setMostPopularMovie(movie: any): void {
-    const sortedArray = this.mostPopularMovies.sort((a,b) => b.popularity - a.popularity);
+  setMostPopularMovie(movie: Content[]): void {
+    const sortedArray = this.mostPopularMovies.sort((a: Content, b: Content) => b.popularity - a.popularity);
     this.mostPopularMovie = sortedArray[0];
   }
 

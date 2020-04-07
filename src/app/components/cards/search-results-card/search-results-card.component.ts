@@ -1,12 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Content } from 'src/app/models/Content';
 
 @Component({
   selector: 'app-search-results-card',
   templateUrl: './search-results-card.component.html'
 })
 export class SearchResultsCardComponent implements OnInit {
-  @Input() content: any;
+  @Input() content: Content;
 
   constructor(private route: ActivatedRoute) { }
 

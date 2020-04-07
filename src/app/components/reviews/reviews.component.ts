@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Review } from 'src/app/models/Review';
 
 @Component({
   selector: 'app-reviews',
@@ -6,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ReviewsComponent implements OnInit {
 
-  @Input() userReview: any;
+  @Input() userReview: Review;
 
   constructor() { }
 

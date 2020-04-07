@@ -1,12 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MovieService } from 'src/app/services/movie/movie.service';
+import { Content } from 'src/app/models/Content';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
-  @Input() content: any;
+  @Input() content: Content;
   trailerKey: string;
 
   constructor(private movieService: MovieService) { }

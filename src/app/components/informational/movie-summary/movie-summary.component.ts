@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from 'src/app/services/movie/movie.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Cast } from 'src/app/models/Cast';
+import { Content } from 'src/app/models/Content';
+import { Review } from 'src/app/models/Review';
 
 @Component({
   selector: 'app-movie-summary',
@@ -9,23 +12,26 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class MovieSummaryComponent implements OnInit {
 
-  movie: any;
-  reviews: any;
-  cast: any;
+  id: string;
+  movie: Content;
+  reviews: Review[];
+  cast: Cast[];
   videos: any;
-  similarMovies: any;
+  similarMovies: Content[];
   trailerKey: string;
 
-  constructor(private route: ActivatedRoute, private movieService: MovieService, private sanitizer: DomSanitizer) { }
+  constructor(
+    private route: ActivatedRoute, 
+    private movieService: MovieService, 
+    private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get("id");
-
-    this.movieService.getMovie(id).subscribe(movie => this.movie = movie);
-    this.movieService.getReviews(id).subscribe(review => this.reviews = review.results);
-    this.movieService.getCast(id).subscribe(cast => this.cast = cast.cast.slice(0, 12));
-    this.movieService.getVideos(id).subscribe(video => this.videos = video.results.slice(0, 4));
-    this.movieService.getSimilarMovies(id).subscribe(movie => this.similarMovies = movie.results);
+    this.id = this.route.snapshot.paramMap.get("id");
+    this.movieService.getMovie(this.id).subscribe(movie => this.movie = movie);
+    this.movieService.getReviews(this.id).subscribe(review => this.reviews = review.results);
+    this.movieService.getCast(this.id).subscribe(cast => this.cast = cast.cast.slice(0, 12));
+    this.movieService.getVideos(this.id).subscribe(video => this.videos = video.results.slice(0, 4));
+    this.movieService.getSimilarMovies(this.id).subscribe(movie => this.similarMovies = movie.results);
   }
 
   backgroundImageUrl(): string {

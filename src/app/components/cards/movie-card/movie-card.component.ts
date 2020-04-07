@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Movie } from 'src/app/models/Movie';
-import { Series } from 'src/app/models/Series';
+import { Content } from 'src/app/models/Content';
 import { MovieService } from 'src/app/services/movie/movie.service';
 
 @Component({
@@ -9,7 +8,7 @@ import { MovieService } from 'src/app/services/movie/movie.service';
 })
 export class MovieCardComponent implements OnInit {
 
-  @Input() content: any;
+  @Input() content: Content;
   trailerKey: string;
 
   constructor(private movieService: MovieService) { }

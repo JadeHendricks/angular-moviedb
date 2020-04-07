@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from 'src/app/services/movie/movie.service';
 import { SeriesService } from 'src/app/services/series/series.service';
+import { Content } from 'src/app/models/Content';
 
 @Component({
   selector: 'app-search-results',
@@ -10,9 +11,7 @@ import { SeriesService } from 'src/app/services/series/series.service';
 export class SearchResultsComponent implements OnInit {
 
   query: string;
-  searchMovies: any;
-  searchSeries: any;
-  searchedContent: any = [];
+  searchedContent: Content[];
 
   constructor(
     private route: ActivatedRoute, 
