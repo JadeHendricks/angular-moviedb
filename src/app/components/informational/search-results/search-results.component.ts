@@ -11,7 +11,7 @@ import { Content } from 'src/app/models/Content';
 export class SearchResultsComponent implements OnInit {
 
   query: string;
-  searchedContent: Content[];
+  searchedContent: Content[] = [];
 
   constructor(
     private route: ActivatedRoute, 
@@ -21,9 +21,6 @@ export class SearchResultsComponent implements OnInit {
   ngOnInit(): void {
     this.query = this.route.snapshot.paramMap.get("query");
     this.movieService.searchMovies(this.query).subscribe(movie => this.searchedContent.push(...movie.results));
-    this.movieService.searchMovies(this.query).subscribe(movie => console.log("searchMovies", movie));
     this.seriesService.searchSeries(this.query).subscribe(series => this.searchedContent.push(...series.results));
-    this.seriesService.searchSeries(this.query).subscribe(series => console.log("searchSeries", series));
   }
-
 }
