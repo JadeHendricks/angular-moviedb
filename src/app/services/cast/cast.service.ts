@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Actor } from 'src/app/models/Actor';
+import { Credits } from 'src/app/models/Credits';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class CastService {
     return this.http.get<Actor>(`https://api.themoviedb.org/3/person/${id}?api_key=${this.api_key}&language=en-US`)
   }
 
-  getCredits(id: string): Observable<any> {
-    return this.http.get<any>(`https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${this.api_key}&language=en-US`)
+  getCredits(id: string): Observable<Credits> {
+    return this.http.get<Credits>(`https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${this.api_key}&language=en-US`)
   }
 }

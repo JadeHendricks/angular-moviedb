@@ -5,6 +5,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Cast } from 'src/app/models/Cast';
 import { Content } from 'src/app/models/Content';
 import { Review } from 'src/app/models/Review';
+import { Video } from 'src/app/models/Video';
 
 @Component({
   selector: 'app-movie-summary',
@@ -16,7 +17,7 @@ export class MovieSummaryComponent implements OnInit {
   movie: Content;
   reviews: Review[];
   cast: Cast[];
-  videos: any;
+  videos: Video[];
   similarMovies: Content[];
   trailerKey: string;
 

@@ -12,7 +12,7 @@ export class ActorSummaryComponent implements OnInit {
 
   id: string;
   actor: Actor;
-  credits: Cast;
+  credits: Cast[];
 
   constructor(
     private route: ActivatedRoute, 
