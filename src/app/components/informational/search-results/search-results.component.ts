@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from 'src/app/services/movie/movie.service';
 import { SeriesService } from 'src/app/services/series/series.service';
 import { Content } from 'src/app/models/Content';
+import { forkJoin } from 'rxjs';
+import { Contents } from 'src/app/models/Contents';
 
 @Component({
   selector: 'app-search-results',
@@ -11,6 +13,8 @@ import { Content } from 'src/app/models/Content';
 export class SearchResultsComponent implements OnInit {
 
   query: string;
+  searchedMovies: Content[] = [];
+  searchedSeries: Content[] = [];
   searchedContent: Content[] = [];
 
   constructor(
@@ -20,7 +24,21 @@ export class SearchResultsComponent implements OnInit {
 
   ngOnInit(): void {
     this.query = this.route.snapshot.paramMap.get("query");
-    this.movieService.searchMovies(this.query).subscribe(movie => this.searchedContent.push(...movie.results));
-    this.seriesService.searchSeries(this.query).subscribe(series => this.searchedContent.push(...series.results));
+
+    this.route.params.subscribe(param => {
+      const moviesSearch = this.movieService.searchMovies(param.query);
+      const seriesSearch = this.seriesService.searchSeries(param.query);
+      
+      forkJoin([moviesSearch, seriesSearch]).subscribe((content: Contents[]) => {
+        const joinedArray = content[0].results.concat(content[1].results);
+        
+        this.getInMostPopularOrder(joinedArray);
+      });
+
+    });
+  }
+
+  getInMostPopularOrder(content: Content[]): void {
+    this.searchedContent = content.sort((a, b) => b.vote_average - a.vote_average);
   }
 }
