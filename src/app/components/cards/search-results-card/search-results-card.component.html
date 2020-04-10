@@ -1,5 +1,6 @@
 <div class="cardSearch__imageholder">
-  <img routerLink="/moviesummary/{{ content?.id }}" class="cardSearch__image" src="https://image.tmdb.org/t/p/w500/{{content?.poster_path}}" title="{{ content?.title ? content?.title : content?.name }}" alt="{{ content?.title ? content?.title : content?.name }}">
+  <img *ngIf="content.poster_path !== null" routerLink="/moviesummary/{{ content?.id }}" class="cardSearch__image" src="https://image.tmdb.org/t/p/w500/{{content?.poster_path}}" title="{{ content?.title ? content?.title : content?.name }}" alt="{{ content?.title ? content?.title : content?.name }}">
+  <img *ngIf="content.poster_path === null" src="./assets/imageNotFound.jpg" class="movieCard__imagesrc" />
 </div>
 <div class="cardSearch__info">
   <app-rating [rating]="content?.vote_average"></app-rating>

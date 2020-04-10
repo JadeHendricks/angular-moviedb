@@ -1,5 +1,6 @@
 <div class="movieCard__image">
-    <img src="https://image.tmdb.org/t/p/w500/{{content?.poster_path}}" class="movieCard__imagesrc" />
+    <img *ngIf="content.poster_path !== null" src="https://image.tmdb.org/t/p/w500/{{content?.poster_path}}" class="movieCard__imagesrc" />
+    <img *ngIf="content.poster_path === null" src="./assets/imageNotFound.jpg" class="movieCard__imagesrc" />
 </div>
 <div class="movieCard__information">
     <h5 class="movieCard__title">{{ content?.title }}</h5>

@@ -14,6 +14,6 @@ export class SearchResultsCardComponent implements OnInit {
   ngOnInit(): void { }
 
   contentTrimer(copy: string): string {
-    return copy.slice(0, 200) + "...";
+    return copy.length < 200 ? copy : copy.slice(0, 200) + "...";
   }
 }

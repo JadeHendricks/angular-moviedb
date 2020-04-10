@@ -2,7 +2,8 @@
   <div class="movieDetails__wrapper">
       <div class="movieDetailSummary actorDetailSummary">
           <div class="actorDetailSummary__imageContanier">
-              <img src="https://image.tmdb.org/t/p/w500/{{actor?.profile_path}}" class="actorDetailSummary__image" alt="Movie Poster" title="Movie Poster">
+              <img *ngIf="actor.profile_path !== null" src="https://image.tmdb.org/t/p/w500/{{actor?.profile_path}}" class="actorDetailSummary__image" alt="Movie Poster" title="Movie Poster">
+              <img *ngIf="actor.profile_path === null" src="./assets/imageNotFound.jpg" class="movieCard__imagesrc" />
               <span class="actorDetailSummary__name">{{ actor?.name }}</span>
           </div>
           <div class="movieDetailSummary__wrapper">

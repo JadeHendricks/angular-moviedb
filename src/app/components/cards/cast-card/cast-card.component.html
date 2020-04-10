@@ -1,5 +1,6 @@
 <div class="castCard__imageholder">
-    <img routerLink="/actorsummary/{{ castMember?.id }}" style="cursor: pointer;" class="castCard__image" src="https://image.tmdb.org/t/p/w500/{{castMember?.profile_path}}" alt="Person" title="person">
+    <img *ngIf="castMember.profile_path !== null" routerLink="/actorsummary/{{ castMember?.id }}" style="cursor: pointer;" class="castCard__image" src="https://image.tmdb.org/t/p/w500/{{castMember?.profile_path}}" alt="Person" title="person">
+    <img *ngIf="castMember.profile_path === null" src="./assets/imageNotFound.jpg" class="movieCard__imagesrc" />
 </div>
 <div class="castCard__info">
     <h5 routerLink="/actorsummary/{{ castMember?.id }}" class="castCard__realname" style="cursor: pointer;">{{ castMember?.name }}</h5>

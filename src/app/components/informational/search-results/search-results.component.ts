@@ -1,5 +1,5 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { MovieService } from 'src/app/services/movie/movie.service';
 import { SeriesService } from 'src/app/services/series/series.service';
 import { Content } from 'src/app/models/Content';
@@ -25,13 +25,13 @@ export class SearchResultsComponent implements OnInit {
   ngOnInit(): void {
     this.query = this.route.snapshot.paramMap.get("query");
 
-    this.route.params.subscribe(param => {
+    this.route.params.subscribe((param: Params) => {
       const moviesSearch = this.movieService.searchMovies(param.query);
       const seriesSearch = this.seriesService.searchSeries(param.query);
       
       forkJoin([moviesSearch, seriesSearch]).subscribe((content: Contents[]) => {
-        const joinedArray = content[0].results.concat(content[1].results);
-        
+        const joinedArray = [...content[0].results, ...content[1].results];
+        console.log("joinedArray", joinedArray)
         this.getInMostPopularOrder(joinedArray);
       });
 
