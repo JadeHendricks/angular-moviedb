@@ -23,9 +23,8 @@ export class SearchResultsComponent implements OnInit {
     private seriesService: SeriesService) { }
 
   ngOnInit(): void {
-    this.query = this.route.snapshot.paramMap.get("query");
-
     this.route.params.subscribe((param: Params) => {
+      this.query = this.route.snapshot.paramMap.get("query");
       const moviesSearch = this.movieService.searchMovies(param.query);
       const seriesSearch = this.seriesService.searchSeries(param.query);
       
