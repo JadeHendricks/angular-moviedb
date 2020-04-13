@@ -1,7 +1,6 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { MovieService } from 'src/app/services/movie/movie.service';
-import { SeriesService } from 'src/app/services/series/series.service';
+import { ContentService } from 'src/app/services/content/content.service';
 import { Content } from 'src/app/models/Content';
 import { forkJoin } from 'rxjs';
 import { Contents } from 'src/app/models/Contents';
@@ -19,14 +18,13 @@ export class SearchResultsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute, 
-    private movieService: MovieService, 
-    private seriesService: SeriesService) { }
+    private contentService: ContentService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((param: Params) => {
       this.query = this.route.snapshot.paramMap.get("query");
-      const moviesSearch = this.movieService.searchMovies(param.query);
-      const seriesSearch = this.seriesService.searchSeries(param.query);
+      const moviesSearch = this.contentService.searchMovies(param.query);
+      const seriesSearch = this.contentService.searchSeries(param.query);
       
       forkJoin([moviesSearch, seriesSearch]).subscribe((content: Contents[]) => {
         const joinedArray = [...content[0].results, ...content[1].results];

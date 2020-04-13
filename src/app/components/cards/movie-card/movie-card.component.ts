@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Content } from 'src/app/models/Content';
-import { MovieService } from 'src/app/services/movie/movie.service';
+import { ContentService } from 'src/app/services/content/content.service';
 
 @Component({
   selector: 'app-movie-card',
@@ -11,13 +11,13 @@ export class MovieCardComponent implements OnInit {
   @Input() content: Content;
   trailerKey: string;
 
-  constructor(private movieService: MovieService) { }
+  constructor(private contentService: ContentService) { }
 
   ngOnInit(): void {
   }
 
   getTrailer(id: number): void {
-    this.movieService.getTrailer(id).subscribe(trailer => {
+    this.contentService.getTrailer(id).subscribe(trailer => {
       this.trailerKey = trailer.results[0].key
       if (this.trailerKey) {
         window.open(

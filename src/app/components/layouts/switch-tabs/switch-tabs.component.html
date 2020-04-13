@@ -1,4 +1,5 @@
 <div class="switchTabs">
-  <div class="switchTabs__tab active">Movies</div>
-  <div class="switchTabs__tab">Series</div>
+  <div [class.active]="this.contentStateValue === 'movies'" 
+  class="switchTabs__tab" name="movies" (click)="changeSiteState($event)">Movies</div>
+  <div [class.active]="this.contentStateValue === 'series'" class="switchTabs__tab" name="series" (click)="changeSiteState($event)">Series</div>
 </div>

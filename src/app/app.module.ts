@@ -20,9 +20,9 @@ import { ReviewsComponent } from './components/reviews/reviews.component';
 import { SwitchTabsComponent } from './components/layouts/switch-tabs/switch-tabs.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { MovieService } from './services/movie/movie.service';
-import { SeriesService } from './services/series/series.service';
 import { CastService } from './services/cast/cast.service';
+import { BaseService } from './services/base/base.service';
+import { ContentService } from './services/content/content.service';
 
 
 @NgModule({
@@ -50,7 +50,7 @@ import { CastService } from './services/cast/cast.service';
     HttpClientModule,
     FormsModule
   ],
-  providers: [MovieService, SeriesService, CastService],
+  providers: [BaseService, ContentService, CastService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
