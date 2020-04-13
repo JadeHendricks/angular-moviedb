@@ -2,7 +2,7 @@
   <div class="movieDetails__wrapper">
       <div class="movieDetailSummary">
           <div class="movieDetailSummary__imageContanier">
-              <img src="https://image.tmdb.org/t/p/w500/{{movie?.poster_path}}" class="movieDetailSummary__image" alt="{{movie?.title}}" title="{{movie?.title}}">
+              <img src="https://image.tmdb.org/t/p/w500/{{content?.poster_path}}" class="movieDetailSummary__image" alt="{{content?.title}}" title="{{content?.title}}">
           </div>
           <div class="movieDetailSummary__wrapper">
               <h3 class="movieDetails__title">Movie Details</h3>
@@ -18,11 +18,11 @@
               <div class="misc">
                 <div class="misc__box">
                     <div class="movieDetails__title movieDetails__title--smaller">Initial release date</div>
-                    <p class="misc__info">{{ movie?.release_date }}</p>
+                    <p class="misc__info">{{ content?.release_date }}</p>
                 </div>
                 <div class="misc__box">
                     <div class="movieDetails__title movieDetails__title--smaller">Runtime</div>
-                    <p class="misc__info">{{ movie?.runtime }}mins</p>
+                    <p class="misc__info">{{ content?.runtime }}mins</p>
                 </div>
               </div>
 
@@ -37,7 +37,7 @@
 
       <div class="movieDetailsMaincontent">
           <header class="movieDetailHeader" [style.background-image]="backgroundImageUrl ? backgroundImageUrl() : null">
-              <svg class="movieDetailHeader__playicon" (click)="getTrailer(movie?.id)">
+              <svg class="movieDetailHeader__playicon" (click)="getTrailer(content?.id)">
                   <use xlink:href="assets/sprite.svg#icon-play2"></use>
               </svg>
               <div class="movieDetailHeader__media">
@@ -56,12 +56,12 @@
           </header>
           <main class="movieMain">
 
-              <app-rating [rating]="movie?.vote_average"></app-rating>
+              <app-rating [rating]="content?.vote_average"></app-rating>
 
-              <h2 class="movieMain__title">{{ movie?.title }} <span>{{ movie?.release_date | date: 'dd-MM-yyyy' }}</span></h2>
+              <h2 class="movieMain__title">{{ content?.title }} <span>{{ content?.release_date | date: 'dd-MM-yyyy' }}</span></h2>
               <div class="movieMain__storyline">
                   <h3 class="marginBottom10">Storyline</h3>
-                  <p>{{ movie?.overview }}</p>
+                  <p>{{ content?.overview }}</p>
               </div>
 
               <div class="cast">
@@ -77,8 +77,8 @@
               <section class="moreMovies">
                   <h3 class="moreMovies__title">Similar Movies</h3>
                   <div class="moreMovies__titles">
-                    <div class="card movieCard" *ngFor="let movie of similarMovies">
-                        <app-movie-card [content]="movie"></app-movie-card>
+                    <div class="card movieCard" *ngFor="let content of similarContent">
+                        <app-movie-card [content]="content"></app-movie-card>
                     </div>  
                   </div>
               </section>

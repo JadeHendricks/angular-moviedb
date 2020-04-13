@@ -14,11 +14,11 @@ import { Video } from 'src/app/models/Video';
 export class MovieSummaryComponent implements OnInit {
 
   id: string;
-  movie: Content;
+  content: Content;
   reviews: Review[];
   cast: Cast[];
   videos: Video[];
-  similarMovies: Content[];
+  similarContent: Content[];
   trailerKey: string;
 
   constructor(
@@ -28,16 +28,16 @@ export class MovieSummaryComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get("id");
-    this.contentService.getMovie(this.id).subscribe(movie => this.movie = movie);
+    this.contentService.getContent(this.id).subscribe(movie => this.content = movie);
     this.contentService.getReviews(this.id).subscribe(review => this.reviews = review.results);
     this.contentService.getCast(this.id).subscribe(cast => this.cast = cast.cast.slice(0, 12));
     this.contentService.getVideos(this.id).subscribe(video => this.videos = video.results.slice(0, 4));
-    this.contentService.getSimilarMovies(this.id).subscribe(movie => this.similarMovies = movie.results);
+    this.contentService.getSimilarContent(this.id).subscribe(movie => this.similarContent = movie.results);
   }
 
   backgroundImageUrl(): string {
-    if (this.movie) {
-      return `url(https://image.tmdb.org/t/p/original/${this.movie?.backdrop_path})`;
+    if (this.content) {
+      return `url(https://image.tmdb.org/t/p/original/${this.content?.backdrop_path})`;
     }
   }
 

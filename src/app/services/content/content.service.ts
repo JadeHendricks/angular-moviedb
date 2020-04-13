@@ -34,13 +34,13 @@ export class ContentService {
     return this.http.get<Videos>(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${this.api_key}&language=en-US&page=1`);
   }
 
-  getMostPopularMovies(): Observable<Contents> {
+  getMostPopularContent(): Observable<Contents> {
     return this.siteState === "movies" ? 
     this.http.get<Contents>(`https://api.themoviedb.org/3/movie/popular?api_key=${this.api_key}&language=en-US&page=1`) : 
     this.http.get<Contents>(`https://api.themoviedb.org/3/tv/popular?api_key=${this.api_key}&language=en-US&page=1`);
   }
 
-  getMovie(id: string): Observable<Content> {
+  getContent(id: string): Observable<Content> {
     return this.siteState === "movies" ? 
     this.http.get<Content>(`https://api.themoviedb.org/3/movie/${id}?api_key=${this.api_key}&language=en-US&page=1`) :
     this.http.get<Content>(`https://api.themoviedb.org/3/tv/${id}?api_key=${this.api_key}&language=en-US&page=1`);
@@ -64,7 +64,7 @@ export class ContentService {
     this.http.get<Videos>(`https://api.themoviedb.org/3/tv/${id}/videos?api_key=${this.api_key}&language=en-US&page=1`);
   }
 
-  getSimilarMovies(id: string): Observable<Contents> {
+  getSimilarContent(id: string): Observable<Contents> {
     return this.siteState === "movies" ? 
     this.http.get<Contents>(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=${this.api_key}&language=en-US&page=1`) : 
     this.http.get<Contents>(`https://api.themoviedb.org/3/tv/${id}/similar?api_key=${this.api_key}&language=en-US&page=1`);

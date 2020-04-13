@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { ContentService } from '../../../services/content/content.service';
 import { Content } from 'src/app/models/Content';
 import { Contents } from 'src/app/models/Contents';
@@ -9,23 +9,23 @@ import { Contents } from 'src/app/models/Contents';
 })
 export class MainContentComponent implements OnInit {
 
-  intialMovies: Content[];
-  mostPopularMovies: Content[];
-  mostPopularMovie: Content;
+  intialContent: Content[];
+  mostPopularContents: Content[];
+  mostPopularContent: Content;
   
   constructor(private contentService: ContentService) { }
 
   ngOnInit(): void {
-    this.contentService.getInitialCardState().subscribe((movie: Contents) => this.intialMovies = movie.results);
-    this.contentService.getMostPopularMovies().subscribe((movie: Contents) => {
-      this.mostPopularMovies = movie.results;
-      this.setMostPopularMovie(this.mostPopularMovies);
+    this.contentService.getInitialCardState().subscribe((content: Contents) => this.intialContent = content.results);
+    this.contentService.getMostPopularContent().subscribe((content: Contents) => {
+      this.mostPopularContents = content.results;
+      this.setMostPopularMovie(this.mostPopularContents);
     });
   }
 
   setMostPopularMovie(movie: Content[]): void {
-    const sortedArray = this.mostPopularMovies.sort((a: Content, b: Content) => b.popularity - a.popularity);
-    this.mostPopularMovie = sortedArray[0];
+    const sortedArray = this.mostPopularContents.sort((a: Content, b: Content) => b.popularity - a.popularity);
+    this.mostPopularContent = sortedArray[0];
   }
 
 }
