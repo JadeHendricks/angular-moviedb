@@ -22,8 +22,20 @@ export class ModalComponent implements OnInit {
     if (event.target.classList.contains("overlay")) {
       this.baseService.modalStateSwap({ hidden: true, state: "" });
     }
-
     return false;
   }
 
+  showPassword(event: any): void {
+    const passwordInput = event.target.parentNode.previousSibling as HTMLInputElement;
+    const visibleIcon = event.target as HTMLInputElement;
+
+    if (passwordInput.getAttribute("type") === "password") {
+      passwordInput.setAttribute("type", "text");
+      visibleIcon.setAttribute("xlink:href", "assets/sprite.svg#icon-eye-blocked");
+    } else {
+      passwordInput.setAttribute("type", "password");
+      visibleIcon.setAttribute("xlink:href", "assets/sprite.svg#icon-eye");
+    }
+  }
+  
 }

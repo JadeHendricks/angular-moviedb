@@ -17,11 +17,11 @@
               </div>
               <div class="inputbox__box">
                   <label id="signup_password" class="inputbox__label">Password *</label>
-                  <input type="text" name="signup_password" class="inputbox__input" placeholder="Password">
-                  <!-- <span class="auth-label">this is an auth message</span> -->
-                  <svg class="modalForm__icon">
+                  <input type="password" name="signup_password" class="inputbox__input" placeholder="Password">
+                  <svg class="modalForm__icon" (click)="showPassword($event)">
                       <use xlink:href="assets/sprite.svg#icon-eye"></use>
                   </svg>
+                  <!-- <span class="auth-label">this is an auth message</span> -->
               </div>
           </div>
           <div *ngIf="showState === 'login'" class="modalForm__login">
@@ -33,18 +33,18 @@
               <div class="inputbox__box">
                   <label id="login_password" class="inputbox__label">Password *</label>
                   <input type="password" name="login_password" class="inputbox__input" placeholder="Password">
-                  <!-- <span class="auth-label">this is an auth message</span> -->
-                  <svg class="modalForm__icon">
+                  <svg class="modalForm__icon" (click)="showPassword($event)">
                       <use xlink:href="assets/sprite.svg#icon-eye"></use>
                   </svg>
+                  <!-- <span class="auth-label">this is an auth message</span> -->
               </div>
               <div class="inputbox__box borderTop0">
                   <label id="login_confirmpassword" class="inputbox__label">Confirm Password *</label>
                   <input type="password" name="login_confirmpassword" class="inputbox__input" placeholder="Confirm Password">
-                  <!-- <span class="auth-label">this is an auth message</span> -->
-                  <svg class="modalForm__icon">
+                  <svg class="modalForm__icon" (click)="showPassword($event)">
                       <use xlink:href="assets/sprite.svg#icon-eye"></use>
                   </svg>
+                  <!-- <span class="auth-label">this is an auth message</span> -->
               </div>
           </div>
           <div class="modalAuth__padding">
