@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { BaseService } from '../../../services/base/base.service';
 
 @Component({
   selector: 'app-top-navigation',
@@ -8,8 +9,11 @@ import { Router } from '@angular/router';
 export class TopNavigationComponent implements OnInit {
 
   query: string;
+  modalState: string;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private baseService: BaseService) { }
 
   ngOnInit(): void {
   }
@@ -19,4 +23,8 @@ export class TopNavigationComponent implements OnInit {
     this.query = "";
   }
 
+  showModal(event: any): void {
+    const modalState = event.srcElement.innerText.toLowerCase();
+    this.baseService.showModal({hidden: false, state: modalState});
+  }
 }
