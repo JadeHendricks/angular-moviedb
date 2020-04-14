@@ -1,12 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ContentService } from '../../../services/content/content.service'
 import { Content } from 'src/app/models/Content';
+import { Videos } from 'src/app/models/Videos';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
+  
   @Input() content: Content;
   trailerKey: string;
 
@@ -15,7 +17,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {}
 
   getTrailer(id: number): void {
-    this.contentService.getTrailer(id).subscribe(trailer => {
+    this.contentService.getTrailer(id).subscribe((trailer: Videos) => {
       this.trailerKey = trailer.results[0].key
       if (this.trailerKey) {
         window.open(

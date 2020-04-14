@@ -42,7 +42,7 @@
       <div class="movieDetailsMaincontent">
           <main class="movieMain">
               <section class="moreMovies">
-                  <h3 class="moreMovies__title">Popular Roles</h3>
+                  <h3 *ngIf="credits.length > 0" class="moreMovies__title">Popular Roles</h3>
                   <div class="moreMovies__titles">
                     <div class="card movieCard" *ngFor="let credit of credits">
                         <app-movie-card [content]="credit"></app-movie-card>

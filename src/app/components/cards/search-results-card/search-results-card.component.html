@@ -4,7 +4,8 @@
 </div>
 <div class="cardSearch__info">
   <app-rating [rating]="content?.vote_average"></app-rating>
-  <h5 class="cardSearch__title" routerLink="/moviesummary/{{ content?.id }}" style="cursor: pointer">{{ content?.title ? content?.title : content?.name  }}</h5>
+  <h5 *ngIf="content.title" class="cardSearch__title" routerLink="/moviesummary/{{ content?.id }}" style="cursor: pointer">{{ content?.title }}</h5>
+  <h5 *ngIf="content.name" class="cardSearch__title" routerLink="/moviesummary/{{ content?.id }}" style="cursor: pointer">{{ content?.name }}</h5>
   <p class="cardSearch__description">
     {{ contentTrimer(content?.overview) }}
   </p>

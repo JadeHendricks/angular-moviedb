@@ -2,7 +2,7 @@
   <div class="movieDetails__wrapper">
       <div class="movieDetailSummary">
           <div class="movieDetailSummary__imageContanier">
-              <img src="https://image.tmdb.org/t/p/w500/{{content?.poster_path}}" class="movieDetailSummary__image" alt="{{content?.title}}" title="{{content?.title}}">
+              <img src="https://image.tmdb.org/t/p/w500/{{content?.poster_path}}" class="movieDetailSummary__image" alt="{{content?.title ? content?.title : content?.name }}" title="{{content?.title ? content?.title : content?.name }}">
           </div>
           <div class="movieDetailSummary__wrapper">
               <h3 class="movieDetails__title">Movie Details</h3>
@@ -27,7 +27,7 @@
               </div>
 
               <div class="reviews">
-                  <h3 class="movieDetails__title">Recent Reviews</h3>
+                  <h3 *ngIf="reviews.length > 0" class="movieDetails__title">Recent Reviews</h3>
                   <div *ngFor="let review of reviews">
                     <app-reviews [userReview]="review"></app-reviews>
                   </div>
@@ -41,7 +41,7 @@
                   <use xlink:href="assets/sprite.svg#icon-play2"></use>
               </svg>
               <div class="movieDetailHeader__media">
-                  <h3 class="movieDetailHeader__title">Media</h3>
+                  <h3 *ngIf="videos.length > 0" class="movieDetailHeader__title">Media</h3>
                   <div class="movieDetailHeader__videos">
                     <div *ngFor="let video of videos">
                         <iframe
@@ -58,7 +58,7 @@
 
               <app-rating [rating]="content?.vote_average"></app-rating>
 
-              <h2 class="movieMain__title">{{ content?.title }} <span>{{ content?.release_date | date: 'dd-MM-yyyy' }}</span></h2>
+              <h2 class="movieMain__title">{{ content?.title ? content?.title : content?.name }} <span>{{ content?.release_date | date: 'dd-MM-yyyy' }}</span></h2>
               <div class="movieMain__storyline">
                   <h3 class="marginBottom10">Storyline</h3>
                   <p>{{ content?.overview }}</p>
@@ -75,7 +75,7 @@
               </div>
 
               <section class="moreMovies">
-                  <h3 class="moreMovies__title">Similar Movies</h3>
+                  <h3 *ngIf="similarContent.length > 0" class="moreMovies__title">Similar Movies</h3>
                   <div class="moreMovies__titles">
                     <div class="card movieCard" *ngFor="let content of similarContent">
                         <app-movie-card [content]="content"></app-movie-card>

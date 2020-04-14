@@ -28,14 +28,12 @@ export class SearchResultsComponent implements OnInit {
       
       forkJoin([moviesSearch, seriesSearch]).subscribe((content: Contents[]) => {
         const joinedArray = [...content[0].results, ...content[1].results];
-        console.log("joinedArray", joinedArray)
         this.getInMostPopularOrder(joinedArray);
       });
-
     });
   }
 
   getInMostPopularOrder(content: Content[]): void {
-    this.searchedContent = content.sort((a, b) => b.vote_average - a.vote_average);
+    this.searchedContent = content.sort((a: Content, b: Content) => b.vote_average - a.vote_average);
   }
 }

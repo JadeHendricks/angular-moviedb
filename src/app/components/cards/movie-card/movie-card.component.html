@@ -3,9 +3,11 @@
     <img *ngIf="content.poster_path === null" src="./assets/imageNotFound.jpg" class="movieCard__imagesrc" />
 </div>
 <div class="movieCard__information">
-    <h5 class="movieCard__title" style="cursor: pointer" routerLink="/moviesummary/{{ content?.id }}">{{ content?.title }}</h5>
+    <h5 *ngIf="content.title" class="movieCard__title" style="cursor: pointer" routerLink="/moviesummary/{{ content?.id }}">{{ content?.title }}</h5>
+    <h5 *ngIf="content.name" class="movieCard__title" style="cursor: pointer" routerLink="/moviesummary/{{ content?.id }}">{{ content?.name }}</h5>
     <app-rating [rating]="content?.vote_average"></app-rating>
-    <p class="movieCard__date">Release date: {{ content?.release_date | date: 'dd-MM-yyyy'}}</p>
+    <p *ngIf="content.release_date" class="movieCard__date">Release date: {{ content?.release_date | date: 'dd-MM-yyyy'}}</p>
+    <p *ngIf="content.first_air_date" class="movieCard__date">Release date: {{ content?.first_air_date | date: 'dd-MM-yyyy'}}</p>
     <div class="movieCard__buttons">
         <button class="button button--green" (click)="getTrailer(content?.id)">Watch Trailer</button>
         <button routerLink="/moviesummary/{{ content?.id }}" class="button button--green button--skeleton">View More</button>
