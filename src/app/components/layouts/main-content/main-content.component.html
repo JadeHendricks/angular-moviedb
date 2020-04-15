@@ -2,7 +2,7 @@
 <section class="movieSection">
   <div class="container">
     <app-switch-tabs></app-switch-tabs>    
-    <h3 class="movieSection__title">Comedies</h3>
+    <h3 class="movieSection__title">{{ initialCardTitle }}</h3>
     <div class="movieSection__titles">
       <div class="card movieCard" *ngFor="let content of intialContent">
         <app-movie-card [content]="content"></app-movie-card>

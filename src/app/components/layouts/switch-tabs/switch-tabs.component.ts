@@ -18,6 +18,7 @@ export class SwitchTabsComponent implements OnInit {
   changeSiteState(event: any) {
     const valueRecieved = event.srcElement.innerText.toLowerCase();
     this.baseService.changeSiteState(valueRecieved);
+    this.baseService.resetState();
   }
 
 }

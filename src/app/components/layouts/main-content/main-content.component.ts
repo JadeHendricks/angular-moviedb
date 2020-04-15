@@ -14,18 +14,23 @@ export class MainContentComponent implements OnInit {
   intialContent: Content[];
   mostPopularContents: Content[];
   mostPopularContent: Content;
+
+  initialCardTitle: string;
+  initialCardChange: Contents;
   
   constructor(
     private contentService: ContentService,
     private baseService: BaseService) { }
 
   ngOnInit(): void {
+    this.baseService.intialCardTitleState.subscribe((value: string) => this.initialCardTitle = value);
+    this.baseService.intialCardState.subscribe((value: any) => this.intialContent = value);
+
     this.baseService.contentState.subscribe((value: string) => {
       this.siteState = value;
       this.siteState ? this.getData() : false;
     });
   }
-
   getData() : void {
     this.contentService.getInitialCardState().subscribe((content: Contents) => this.intialContent = content.results);
     this.contentService.getMostPopularContent().subscribe((content: Contents) => {
