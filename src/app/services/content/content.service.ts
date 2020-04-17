@@ -70,6 +70,10 @@ export class ContentService {
     this.http.get<Contents>(`https://api.themoviedb.org/3/tv/${id}/similar?api_key=${this.api_key}&language=en-US&page=1`);
   }
 
+  getGenres(): Observable<Contents> {
+    return this.http.get<Contents>(`https://api.themoviedb.org/3/genre/movie/list?api_key=${this.api_key}&language=en-US`);
+  }
+
   searchMovies(query: string): Observable<Contents> {
     return this.http.get<Contents>(`https://api.themoviedb.org/3/search/movie?api_key=${this.api_key}&query=${query}&language=en-US&page=1&include_adult=false`);
   }

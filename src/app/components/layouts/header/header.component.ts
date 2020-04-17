@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChange, SimpleChanges } from '@angular/core';
 import { ContentService } from '../../../services/content/content.service'
 import { Content } from 'src/app/models/Content';
+import { Contents } from 'src/app/models/Contents';
 import { Videos } from 'src/app/models/Videos';
+import { Genre } from 'src/app/models/Genre';
 
 @Component({
   selector: 'app-header',
@@ -11,10 +13,17 @@ export class HeaderComponent implements OnInit {
   
   @Input() content: Content;
   trailerKey: string;
+  genres: Genre[];
 
   constructor(private contentService: ContentService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.content.currentValue) { 
+      this.setGenresArray(changes.content.currentValue);
+    }
+  }
 
   getTrailer(id: number): void {
     this.contentService.getTrailer(id).subscribe((trailer: Videos) => {
@@ -25,6 +34,12 @@ export class HeaderComponent implements OnInit {
           `_blank`
         );
       }
+    });
+  }
+
+  setGenresArray(content: Content): void {
+    this.contentService.getGenres().subscribe((value: Contents) => {
+      this.genres = value.genres.filter((element: Genre) => content.genre_ids.includes(element.id)).slice(0, 2);
     });
   }
 

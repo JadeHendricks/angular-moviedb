@@ -1,3 +1,5 @@
+import { Genre } from './Genre';
+
 export interface Content {
   id: number,
   name: string,
@@ -9,6 +11,7 @@ export interface Content {
   vote_average: number,
   overview: string,
   release_date: string,
+  genres: Genre[],
   genre_ids: number[],
   first_air_date: string,
   runtime: string

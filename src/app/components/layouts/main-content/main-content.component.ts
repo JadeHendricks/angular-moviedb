@@ -31,6 +31,7 @@ export class MainContentComponent implements OnInit {
       this.siteState ? this.getData() : false;
     });
   }
+  
   getData() : void {
     this.contentService.getInitialCardState().subscribe((content: Contents) => this.intialContent = content.results);
     this.contentService.getMostPopularContent().subscribe((content: Contents) => {

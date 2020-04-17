@@ -10,8 +10,7 @@
               <div class="category">
                   <div class="movieDetails__title movieDetails__title--smaller">Category</div>
                   <div class="category__wrapper">
-                      <div class="category__pill">Drama</div>
-                      <div class="category__pill">Sci-fi</div>
+                      <div class="category__pill" *ngFor="let genre of genres">{{ genre.name }}</div>
                   </div>
               </div>
 

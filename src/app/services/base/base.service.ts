@@ -55,7 +55,7 @@ export class BaseService {
   }
 
   resetState(): void {
-    this.intialCardTitleBehavior.next("Now Playing");
-    this.updateTitleAndCards("Now Playing");
+    this.intialCardTitleBehavior.next("now_playing");
+    this.updateTitleAndCards("now_playing");
   }
 }

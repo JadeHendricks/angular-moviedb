@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ContentService } from 'src/app/services/content/content.service';
 import { BaseService } from '../../../services/base/base.service';
@@ -11,6 +11,7 @@ import { Reviews } from 'src/app/models/Reviews';
 import { Videos } from 'src/app/models/Videos';
 import { Contents } from 'src/app/models/Contents';
 import { Credits } from 'src/app/models/Credits';
+import { Genre } from 'src/app/models/Genre';
 
 @Component({
   selector: 'app-movie-summary',
@@ -26,6 +27,7 @@ export class MovieSummaryComponent implements OnInit {
   videos: Video[];
   similarContent: Content[];
   trailerKey: string;
+  genres: Genre[];
 
   constructor(
     private route: ActivatedRoute, 
@@ -41,8 +43,17 @@ export class MovieSummaryComponent implements OnInit {
     })
   }
 
+  setGenresArray(content: Content): void {
+    this.contentService.getGenres().subscribe((value: Contents) => {
+      this.genres = value.genres.filter((genreOne: Genre) => content.genres.find(genreTwo => genreOne.id === genreTwo.id)).slice(0, 2);
+    });
+  }
+
   getData(): void {
-    this.contentService.getContent(this.id).subscribe((movie: Content) => this.content = movie);
+    this.contentService.getContent(this.id).subscribe((movie: Content) => {
+      this.content = movie;
+      this.setGenresArray(this.content);
+    });
     this.contentService.getReviews(this.id).subscribe((review: Reviews) => this.reviews = review.results);
     this.contentService.getCast(this.id).subscribe((cast: Credits) => this.cast = cast.cast.slice(0, 12));
     this.contentService.getVideos(this.id).subscribe((video: Videos) => this.videos = video.results.slice(0, 4));
