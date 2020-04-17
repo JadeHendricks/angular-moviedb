@@ -11,11 +11,11 @@ import { Contents } from 'src/app/models/Contents';
 export class MainContentComponent implements OnInit {
   
   siteState: string = "";
+  convertedTitle:  string;
   intialContent: Content[];
   mostPopularContents: Content[];
   mostPopularContent: Content;
 
-  initialCardTitle: string;
   initialCardChange: Contents;
   
   constructor(
@@ -23,7 +23,7 @@ export class MainContentComponent implements OnInit {
     private baseService: BaseService) { }
 
   ngOnInit(): void {
-    this.baseService.intialCardTitleState.subscribe((value: string) => this.initialCardTitle = value);
+    this.baseService.intialCardTitleState.subscribe((value: string) => this.convertedTitle = value.replace(/_/g, " "));
     this.baseService.intialCardState.subscribe((value: any) => this.intialContent = value);
 
     this.baseService.contentState.subscribe((value: string) => {

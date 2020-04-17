@@ -19,7 +19,7 @@ export class BaseService {
   modalBehavior = new BehaviorSubject<object>({hidden: true, state: ''});
   modalState = this.modalBehavior.asObservable();
 
-  intialCardTitleBehavior = new BehaviorSubject<string>("Now Playing");
+  intialCardTitleBehavior = new BehaviorSubject<string>("now_playing");
   intialCardTitleState = this.intialCardTitleBehavior.asObservable();
 
   intialCardBehavior = new BehaviorSubject<Contents>(null);

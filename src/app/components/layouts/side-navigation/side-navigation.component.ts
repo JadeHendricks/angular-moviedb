@@ -25,7 +25,6 @@ export class SideNavigationComponent implements OnInit {
     } else {
       this.baseService.updateTitleAndCards(title);
     }
-
   }
 
 }

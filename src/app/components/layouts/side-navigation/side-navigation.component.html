@@ -1,29 +1,29 @@
 <nav>
   <h3 class="navigation__logo" style="cursor: pointer;" routerLink="/">MDBv2</h3>
   <div class="navigation__wrapper">
-      <a [class.active]="title === 'Now Playing'" class="navigation__node" (click)="updateTitleAndCards('now_playing')">
+      <a [class.active]="title === 'now_playing'" class="navigation__node" (click)="updateTitleAndCards('now_playing')">
           <svg class="navigation__icon">
               <use xlink:href="assets/sprite.svg#icon-video"></use>
           </svg>
           <h5 class="navigation__nodename">Now Playing</h5>
       </a>
-      <a [class.active]="title === 'Top Rated'" data-content="Top Rated" class="navigation__node" (click)="updateTitleAndCards('top_rated')">
+      <a [class.active]="title === 'top_rated'" class="navigation__node" (click)="updateTitleAndCards('top_rated')">
           <svg class="navigation__icon">
               <use xlink:href="assets/sprite.svg#icon-desktop"></use>
           </svg>
           <h5 class="navigation__nodename">Top Rated</h5>
       </a>
-      <a [class.active]="title === 'Popular'" class="navigation__node" (click)="updateTitleAndCards('popular')">
+      <a [class.active]="title === 'popular'" class="navigation__node" (click)="updateTitleAndCards('popular')">
           <svg class="navigation__icon">
               <use xlink:href="assets/sprite.svg#icon-presentation"></use>
           </svg>
           <h5 class="navigation__nodename">Popular</h5>
       </a>
-      <a *ngIf="siteContent === 'movies'" [class.active]="title === 'Coming Soon'" data-content="Coming Soon" class="navigation__node" (click)="updateTitleAndCards('upcoming')">
+      <a *ngIf="siteContent === 'movies'" [class.active]="title === 'upcoming'" class="navigation__node" (click)="updateTitleAndCards('upcoming')">
           <svg class="navigation__icon">
               <use xlink:href="assets/sprite.svg#icon-clock"></use>
           </svg>
-          <h5 class="navigation__nodename">Coming Soon</h5>
+          <h5 class="navigation__nodename">Upcoming</h5>
       </a>
   </div>
 </nav>
