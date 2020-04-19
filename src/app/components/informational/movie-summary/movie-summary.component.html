@@ -26,7 +26,7 @@
               </div>
 
               <div class="reviews">
-                  <h3 *ngIf="reviews.length > 0" class="movieDetails__title">Recent Reviews</h3>
+                  <h3 *ngIf="reviews?.length > 0" class="movieDetails__title">Recent Reviews</h3>
                   <div *ngFor="let review of reviews">
                     <app-reviews [userReview]="review"></app-reviews>
                   </div>
@@ -40,7 +40,7 @@
                   <use xlink:href="assets/sprite.svg#icon-play2"></use>
               </svg>
               <div class="movieDetailHeader__media">
-                  <h3 *ngIf="videos.length > 0" class="movieDetailHeader__title">Media</h3>
+                  <h3 *ngIf="videos?.length > 0" class="movieDetailHeader__title">Media</h3>
                   <div class="movieDetailHeader__videos">
                     <div *ngFor="let video of videos">
                         <iframe
@@ -74,7 +74,7 @@
               </div>
 
               <section class="moreMovies">
-                  <h3 *ngIf="similarContent.length > 0" class="moreMovies__title">Similar Movies</h3>
+                  <h3 *ngIf="similarContent?.length > 0" class="moreMovies__title">Similar Movies</h3>
                   <div class="moreMovies__titles">
                     <div class="card movieCard" *ngFor="let content of similarContent">
                         <app-movie-card [content]="content"></app-movie-card>

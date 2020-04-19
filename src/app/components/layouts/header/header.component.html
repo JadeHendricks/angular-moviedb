@@ -9,8 +9,9 @@
               <div class="category__pill category__pill--large category__pill--white" *ngFor="let genre of genres">{{ genre.name }}</div>
           </div>
       </div>
-      <h1 class="movie-header__title">{{ content?.title }}</h1>
-      <span class="movie-header__date">Release date: {{ content?.release_date | date: 'dd-MM-yyyy' }}</span>
+      <h1 class="movie-header__title">{{ content?.title ? content?.title : content?.name }}</h1>
+      <p class="movie-header__date" *ngIf="content?.release_date" class="movieCard__date" style="margin-bottom: 20px;">Release date: {{ content?.release_date | date: 'dd-MM-yyyy'}}</p>
+      <p class="movie-header__date" *ngIf="content?.first_air_date" class="movieCard__date" style="margin-bottom: 20px;">Release date: {{ content?.first_air_date | date: 'dd-MM-yyyy'}}</p>
       <p class="movie-header__description">
         {{ content?.overview }}
       </p>

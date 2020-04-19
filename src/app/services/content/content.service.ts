@@ -31,7 +31,9 @@ export class ContentService {
   }
 
   getTrailer (id: number): Observable<Videos> {
-    return this.http.get<Videos>(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${this.api_key}&language=en-US&page=1`);
+    return this.siteState === "movies" ? 
+    this.http.get<Videos>(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${this.api_key}&language=en-US&page=1`) : 
+    this.http.get<Videos>(`https://api.themoviedb.org/3/tv/${id}/videos?api_key=${this.api_key}&language=en-US&page=1`);
   }
 
   getMostPopularContent(): Observable<Contents> {
