@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Content } from 'src/app/models/Content';
 import { ContentService } from 'src/app/services/content/content.service';
 
@@ -6,10 +7,11 @@ import { ContentService } from 'src/app/services/content/content.service';
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html'
 })
-export class MovieCardComponent implements OnInit {
+export class MovieCardComponent implements OnInit, OnDestroy {
 
   @Input() content: Content;
   private trailerKey: string;
+  private getTrailerSubscription: Subscription;
 
   constructor(
     private contentService: ContentService
@@ -19,7 +21,7 @@ export class MovieCardComponent implements OnInit {
   }
 
   public getTrailer(id: number): void {
-    this.contentService.getTrailer(id).subscribe(trailer => {
+    this.getTrailerSubscription = this.contentService.getTrailer(id).subscribe(trailer => {
       this.trailerKey = trailer.results[0].key
       if (this.trailerKey) {
         window.open(
@@ -28,5 +30,9 @@ export class MovieCardComponent implements OnInit {
         );
       }
     });
+  }
+  
+  ngOnDestroy(): void {
+    if (this.getTrailerSubscription) this.getTrailerSubscription.unsubscribe();
   }
 }

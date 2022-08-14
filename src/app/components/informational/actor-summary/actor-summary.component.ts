@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CastService } from 'src/app/services/cast/cast.service';
 import { BaseService } from '../../../services/base/base.service';
 import { Actor } from 'src/app/models/Actor';
 import { Cast } from 'src/app/models/Cast';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-actor-summary',
   templateUrl: './actor-summary.component.html'
 })
-export class ActorSummaryComponent implements OnInit {
+export class ActorSummaryComponent implements OnInit, OnDestroy {
   
   private siteState: string = "";
   private id: string = "";
+  private contentStateSubscription: Subscription;
 
   public actor: Actor;
   public credits: Cast[];
@@ -36,7 +37,7 @@ export class ActorSummaryComponent implements OnInit {
   }
 
   private getContentState(): void {
-    this.baseService.contentState.subscribe((value: string) => {
+    this.contentStateSubscription = this.baseService.contentState.subscribe((value: string) => {
       if (value) {
         this.siteState = value;
         this.siteState ? this.getActorAndCredits() : false; 
@@ -60,5 +61,9 @@ export class ActorSummaryComponent implements OnInit {
   
   private getGender(genderCode: number): void {
     this.gender = genderCode === 2 ? "Male" : "Female"
+  }
+
+  ngOnDestroy(): void {
+    if (this.contentStateSubscription) this.contentStateSubscription.unsubscribe();
   }
 }

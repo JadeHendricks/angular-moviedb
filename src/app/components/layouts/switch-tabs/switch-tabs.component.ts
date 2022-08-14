@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { BaseService } from '../../../services/base/base.service';
 
 @Component({
   selector: 'app-switch-tabs',
   templateUrl: './switch-tabs.component.html'
 })
-export class SwitchTabsComponent implements OnInit {
+export class SwitchTabsComponent implements OnInit, OnDestroy {
 
-  contentStateValue: string;
+  public contentStateValue: string;
+  private contentStateSubscription: Subscription;
 
   constructor(
     private baseService: BaseService
@@ -18,7 +20,7 @@ export class SwitchTabsComponent implements OnInit {
   }
 
   private getContentState(): void {
-    this.baseService.contentState.subscribe((value: string) => {
+    this.contentStateSubscription = this.baseService.contentState.subscribe((value: string) => {
       if (value) {
         this.contentStateValue = value
       }
@@ -31,5 +33,9 @@ export class SwitchTabsComponent implements OnInit {
       this.baseService.changeSiteState(valueRecieved);
       this.baseService.resetState();
     }
+  }
+
+  ngOnDestroy(): void {
+    if (this.contentStateSubscription) this.contentStateSubscription.unsubscribe();
   }
 }

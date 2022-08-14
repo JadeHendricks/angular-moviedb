@@ -14,7 +14,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   public searchedContent: Content[] = [];
 
   private routingSubscription: Subscription;
-  private getSearchMoviesAndSeriesSubscription: Subscription;
 
   constructor(
     private route: ActivatedRoute, 
@@ -34,7 +33,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
 
   private getSearchMoviesAndSeries(param: Params): void {
-    this.getSearchMoviesAndSeriesSubscription = forkJoin([
+    forkJoin([
       this.contentService.searchMovies(param.query), 
       this.contentService.searchSeries(param.query)])
       .subscribe(([movies, series]) => {
@@ -53,6 +52,5 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.routingSubscription) this.routingSubscription.unsubscribe();
-    if (this.getSearchMoviesAndSeriesSubscription) this.getSearchMoviesAndSeriesSubscription.unsubscribe();
   }
 }
