@@ -13,7 +13,6 @@
               <div class="inputbox__box">
                   <label id="signup_email" class="inputbox__label">Email *</label>
                   <input type="text" name="signup_email" class="inputbox__input" placeholder="Email">
-                  <!-- <span class="auth-label">this is an auth message</span> -->
               </div>
               <div class="inputbox__box">
                   <label id="signup_password" class="inputbox__label">Password *</label>
@@ -21,14 +20,12 @@
                   <svg class="modalForm__icon" (click)="showPassword($event)">
                       <use xlink:href="assets/sprite.svg#icon-eye"></use>
                   </svg>
-                  <!-- <span class="auth-label">this is an auth message</span> -->
               </div>
           </div>
           <div *ngIf="showState === 'login'" class="modalForm__login">
               <div class="inputbox__box">
                   <label id="login_email" class="inputbox__label">Email *</label>
                   <input type="text" name="login_email" class="inputbox__input" placeholder="Email">
-                  <!-- <span class="auth-label">this is an auth message</span> -->
               </div>
               <div class="inputbox__box">
                   <label id="login_password" class="inputbox__label">Password *</label>
@@ -36,7 +33,6 @@
                   <svg class="modalForm__icon" (click)="showPassword($event)">
                       <use xlink:href="assets/sprite.svg#icon-eye"></use>
                   </svg>
-                  <!-- <span class="auth-label">this is an auth message</span> -->
               </div>
               <div class="inputbox__box borderTop0">
                   <label id="login_confirmpassword" class="inputbox__label">Confirm Password *</label>
@@ -44,12 +40,10 @@
                   <svg class="modalForm__icon" (click)="showPassword($event)">
                       <use xlink:href="assets/sprite.svg#icon-eye"></use>
                   </svg>
-                  <!-- <span class="auth-label">this is an auth message</span> -->
               </div>
           </div>
           <div class="modalAuth__padding">
               <button class="button button--green" type="submit" disabled>{{ showState === 'login' ? 'Login' : 'Sign up' }}</button>
-              <!-- <span class="auth-label paddingBottom30">this is an auth message</span> -->
           </div>
       </div>
   </div>
