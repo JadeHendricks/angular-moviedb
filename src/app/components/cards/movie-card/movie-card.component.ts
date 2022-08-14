@@ -9,14 +9,16 @@ import { ContentService } from 'src/app/services/content/content.service';
 export class MovieCardComponent implements OnInit {
 
   @Input() content: Content;
-  trailerKey: string;
+  private trailerKey: string;
 
-  constructor(private contentService: ContentService) { }
+  constructor(
+    private contentService: ContentService
+  ) { }
 
   ngOnInit(): void {
   }
 
-  getTrailer(id: number): void {
+  public getTrailer(id: number): void {
     this.contentService.getTrailer(id).subscribe(trailer => {
       this.trailerKey = trailer.results[0].key
       if (this.trailerKey) {

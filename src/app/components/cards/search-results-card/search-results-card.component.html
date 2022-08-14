@@ -7,6 +7,6 @@
   <h5 *ngIf="content.title" class="cardSearch__title" routerLink="/moviesummary/{{ content?.id }}" style="cursor: pointer">{{ content?.title }}</h5>
   <h5 *ngIf="content.name" class="cardSearch__title" routerLink="/moviesummary/{{ content?.id }}" style="cursor: pointer">{{ content?.name }}</h5>
   <p class="cardSearch__description">
-    {{ contentTrimer(content?.overview) }}
+    {{ trimmedContent }}
   </p>
 </div>

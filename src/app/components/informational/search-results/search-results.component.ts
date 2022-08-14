@@ -1,39 +1,58 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ContentService } from 'src/app/services/content/content.service';
 import { Content } from 'src/app/models/Content';
-import { forkJoin } from 'rxjs';
-import { Contents } from 'src/app/models/Contents';
+import { forkJoin, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-search-results',
   templateUrl: './search-results.component.html'
 })
-export class SearchResultsComponent implements OnInit {
+export class SearchResultsComponent implements OnInit, OnDestroy {
 
-  query: string;
-  searchedMovies: Content[] = [];
-  searchedSeries: Content[] = [];
-  searchedContent: Content[] = [];
+  public query: string;
+  public searchedContent: Content[] = [];
+
+  private routingSubscription: Subscription;
+  private getSearchMoviesAndSeriesSubscription: Subscription;
 
   constructor(
     private route: ActivatedRoute, 
     private contentService: ContentService) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe((param: Params) => {
-      this.query = this.route.snapshot.paramMap.get("query");
-      const moviesSearch = this.contentService.searchMovies(param.query);
-      const seriesSearch = this.contentService.searchSeries(param.query);
-      
-      forkJoin([moviesSearch, seriesSearch]).subscribe((content: Contents[]) => {
-        const joinedArray = [...content[0].results, ...content[1].results];
-        this.getInMostPopularOrder(joinedArray);
-      });
+    this.getRoutingParam();
+  }
+
+  private getRoutingParam(): void {
+    this.routingSubscription = this.route.params.subscribe((param: Params) => {
+      if (param && Object.keys(param).length) {
+        this.query = this.route.snapshot.paramMap.get("query");
+        this.getSearchMoviesAndSeries(param);
+      }
     });
   }
 
-  getInMostPopularOrder(content: Content[]): void {
-    this.searchedContent = content.sort((a: Content, b: Content) => b.vote_average - a.vote_average);
+  private getSearchMoviesAndSeries(param: Params): void {
+    this.getSearchMoviesAndSeriesSubscription = forkJoin([
+      this.contentService.searchMovies(param.query), 
+      this.contentService.searchSeries(param.query)])
+      .subscribe(([movies, series]) => {
+        if (movies && movies.results && series && series.results) {
+          const joinedArray = [...movies.results, ...series.results];
+          this.getInMostPopularOrder(joinedArray);
+        }
+    });
+  }
+
+  private getInMostPopularOrder(content: Content[]): void {
+    if (content && content.length) {
+      this.searchedContent = content.sort((contentA: Content, contentB: Content) => contentB.vote_average - contentA.vote_average);
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.routingSubscription) this.routingSubscription.unsubscribe();
+    if (this.getSearchMoviesAndSeriesSubscription) this.getSearchMoviesAndSeriesSubscription.unsubscribe();
   }
 }

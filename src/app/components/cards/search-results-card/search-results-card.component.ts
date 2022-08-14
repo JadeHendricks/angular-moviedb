@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Content } from 'src/app/models/Content';
 
 @Component({
@@ -8,12 +7,17 @@ import { Content } from 'src/app/models/Content';
 })
 export class SearchResultsCardComponent implements OnInit {
   @Input() content: Content;
+  public trimmedContent: string = "";
 
-  constructor(private route: ActivatedRoute) { }
+  constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.contentTrimer(this.content.overview);
+  }
 
-  contentTrimer(copy: string): string {
-    return copy.length < 200 ? copy : copy.slice(0, 200) + "...";
+  private contentTrimer(copy: string): void {
+    if (copy) {
+      this.trimmedContent = copy.length < 200 ? copy : copy.slice(0, 200) + "...";
+    }
   }
 }
