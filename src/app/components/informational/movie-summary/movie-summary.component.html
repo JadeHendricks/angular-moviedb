@@ -35,7 +35,7 @@
       </div>
 
       <div class="movieDetailsMaincontent">
-          <header class="movieDetailHeader" [style.background-image]="backgroundImageUrl ? backgroundImageUrl() : null">
+          <header class="movieDetailHeader" [style.background-image]="this.backgroundImage ? this.backgroundImage : null">
               <svg class="movieDetailHeader__playicon" (click)="getTrailer(content?.id)">
                   <use xlink:href="assets/sprite.svg#icon-play2"></use>
               </svg>
