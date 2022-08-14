@@ -36,7 +36,7 @@ export class SideNavigationComponent implements OnInit, OnDestroy {
   }
 
   private getSiteContent(): void {
-    this.getSiteContentSubscription = this.baseService.contentBehavior.subscribe((value: string) => {
+    this.getSiteContentSubscription = this.baseService.contentState.subscribe((value: string) => {
       if (value) {
         this.siteContent = value
       }

@@ -9,15 +9,17 @@ import { Credits } from 'src/app/models/Credits';
 })
 export class CastService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   api_key: string = "e87f29ad6137f88242f3bcd9b94b1af7";
 
-  getActor(id: string): Observable<Actor>  {
+  public getActor(id: string): Observable<Actor>  {
     return this.http.get<Actor>(`https://api.themoviedb.org/3/person/${id}?api_key=${this.api_key}&language=en-US`)
   }
 
-  getCredits(id: string): Observable<Credits> {
+  public getCredits(id: string): Observable<Credits> {
     return this.http.get<Credits>(`https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${this.api_key}&language=en-US`)
   }
 }
