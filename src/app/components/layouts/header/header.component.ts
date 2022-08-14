@@ -31,26 +31,30 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.content.currentValue) {
+    if (changes && changes.content && changes.content.currentValue) {
       this.setGenresArray(changes.content.currentValue);
     }
   }
 
   public getTrailer(id: number): void {
     this.getTrailerSubscription = this.contentService.getTrailer(id).subscribe((trailer: Videos) => {
-      this.trailerKey = trailer.results[0].key;
-      if (this.trailerKey) {
-        window.open(
-          `https://www.youtube.com/watch?v=${this.trailerKey}`,
-          `_blank`
-        );
+      if (trailer) {
+        this.trailerKey = trailer.results[0].key;
+        if (this.trailerKey) {
+          window.open(
+            `https://www.youtube.com/watch?v=${this.trailerKey}`,
+            `_blank`
+          );
+        }
       }
     });
   }
 
   private setGenresArray(content: Content): void {
     this.getGenresSubscription = this.contentService.getGenres().subscribe((value: Contents) => {
-      this.genres = value.genres.filter((element: Genre) => content.genre_ids.includes(element.id)).slice(0, 2);
+      if (value && value.genres && value.genres.length) {
+        this.genres = value.genres.filter((element: Genre) => content.genre_ids.includes(element.id)).slice(0, 2);
+      }
     });
   }
 

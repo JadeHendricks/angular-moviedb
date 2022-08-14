@@ -4,7 +4,9 @@
     <app-switch-tabs></app-switch-tabs>    
     <h3 class="movieSection__title" style="text-transform: capitalize;">{{ convertedTitle }}</h3>
     <div class="movieSection__titles">
-      <div class="card movieCard" *ngFor="let content of intialContent">
+      <div 
+        class="card movieCard" 
+        *ngFor="let content of intialContent">
         <app-movie-card [content]="content"></app-movie-card>
       </div>
     </div>
