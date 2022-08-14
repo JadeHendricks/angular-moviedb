@@ -1,21 +1,31 @@
-<header class="movie-header" [style.background-image]="backgroundImageUrl ? backgroundImageUrl() : null">
+<header class="movie-header" [style.background-image]="backgroundImage ? backgroundImage : null">
   <div class="container-small">
-      <svg class="movie-header__playicon" (click)="getTrailer(content?.id)">
-          <use xlink:href="assets/sprite.svg#icon-play2"></use>
-      </svg>
-      <h4 class="movie-header__slug">Most Popular</h4>
-      <div class="category">
-          <div class="category__wrapper">
-              <div class="category__pill category__pill--large category__pill--white" *ngFor="let genre of genres">{{ genre.name }}</div>
-          </div>
+    <svg class="movie-header__playicon" (click)="getTrailer(content?.id)">
+      <use xlink:href="assets/sprite.svg#icon-play2"></use>
+    </svg>
+    <h4 class="movie-header__slug">Most Popular</h4>
+    <div class="category">
+      <div class="category__wrapper">
+        <div 
+          class="category__pill category__pill--large category__pill--white" 
+          *ngFor="let genre of genres">
+          {{genre.name }}
+        </div>
       </div>
-      <h1 class="movie-header__title">{{ content?.title ? content?.title : content?.name }}</h1>
-      <p class="movie-header__date" *ngIf="content?.release_date" class="movieCard__date" style="margin-bottom: 20px;">Release date: {{ content?.release_date | date: 'dd-MM-yyyy'}}</p>
-      <p class="movie-header__date" *ngIf="content?.first_air_date" class="movieCard__date" style="margin-bottom: 20px;">Release date: {{ content?.first_air_date | date: 'dd-MM-yyyy'}}</p>
-      <p class="movie-header__description">
-        {{ content?.overview }}
-      </p>
-      <button routerLink="/moviesummary/{{ content?.id }}" class="button button--green marginBottom20">View More</button>
-      <button class="marginLeft30 button button--green marginBottom20" (click)="getTrailer(content?.id)">Watch Trailer</button>
+    </div>
+    <h1 class="movie-header__title">{{ content?.title ? content?.title : content?.name }}</h1>
+    <p class="movie-header__date" *ngIf="content?.release_date" class="movieCard__date" style="margin-bottom: 20px;">Release date: {{ content?.release_date | date: 'dd-MM-yyyy'}}</p>
+    <p class="movie-header__date" *ngIf="content?.first_air_date" class="movieCard__date" style="margin-bottom: 20px;">Release date: {{ content?.first_air_date | date: 'dd-MM-yyyy'}}</p>
+    <p class="movie-header__description">{{ content?.overview }}</p>
+    <button 
+      routerLink="/moviesummary/{{ content?.id }}" 
+      class="button button--green marginBottom20">
+      View More
+    </button>
+    <button 
+      class="marginLeft30 button button--green marginBottom20" 
+      (click)="getTrailer(content?.id)">
+      Watch Trailer
+    </button>
   </div>
 </header>
