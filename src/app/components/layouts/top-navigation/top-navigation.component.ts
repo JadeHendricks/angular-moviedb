@@ -8,23 +8,25 @@ import { BaseService } from '../../../services/base/base.service';
 })
 export class TopNavigationComponent implements OnInit {
 
-  query: string;
-  modalState: string;
+  public query: string;
 
   constructor(
     private router: Router,
-    private baseService: BaseService) { }
+    private baseService: BaseService
+  ) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit(): void {
+  public onSubmit(): void {
     this.router.navigate([`/searchresults/${this.query}`]);
     this.query = "";
   }
 
-  showModal(event: any): void {
-    const modalState = event.srcElement.innerText.toLowerCase();
-    this.baseService.showModal({hidden: false, state: modalState});
+  public showModal(event: any): void {
+    if (event && event.srcElement) {
+      const modalState = event.srcElement.innerText.toLowerCase();
+      this.baseService.showModal({hidden: false, state: modalState});
+    }
   }
 }

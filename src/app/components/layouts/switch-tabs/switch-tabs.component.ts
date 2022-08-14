@@ -9,16 +9,27 @@ export class SwitchTabsComponent implements OnInit {
 
   contentStateValue: string;
 
-  constructor(private baseService: BaseService) { }
+  constructor(
+    private baseService: BaseService
+  ) { }
 
   ngOnInit(): void {
-    this.baseService.contentState.subscribe(value => this.contentStateValue = value);
+    this.getContentState();
   }
 
-  changeSiteState(event: any) {
-    const valueRecieved = event.srcElement.innerText.toLowerCase();
-    this.baseService.changeSiteState(valueRecieved);
-    this.baseService.resetState();
+  private getContentState(): void {
+    this.baseService.contentState.subscribe((value: string) => {
+      if (value) {
+        this.contentStateValue = value
+      }
+    });
   }
 
+  public changeSiteState(event: any) {
+    if (event && event.srcElement) {
+      const valueRecieved = event.srcElement.innerText.toLowerCase();
+      this.baseService.changeSiteState(valueRecieved);
+      this.baseService.resetState();
+    }
+  }
 }

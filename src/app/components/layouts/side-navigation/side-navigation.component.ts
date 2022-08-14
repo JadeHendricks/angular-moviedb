@@ -1,30 +1,62 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { BaseService } from '../../../services/base/base.service';
 
 @Component({
   selector: 'app-side-navigation, [app-side-navigation]',
   templateUrl: './side-navigation.component.html'
 })
-export class SideNavigationComponent implements OnInit {
+export class SideNavigationComponent implements OnInit, OnDestroy {
 
-  title: string;
-  siteContent: string;
-  isSeries: boolean;
+  public title: string;
+  public siteContent: string;
 
-  constructor(private baseService: BaseService) { }
+  private intialCardTitleStateSubscription: Subscription;
+  private getSiteContentSubscription: Subscription;
+
+  constructor(
+    private baseService: BaseService
+  ) { }
 
   ngOnInit(): void {
-    this.baseService.intialCardTitleState.subscribe((value: string) => this.title = value);
-    this.baseService.contentBehavior.subscribe((value: string) => this.siteContent = value);
+    this.registerSubscriptions();
+  }
+
+  private registerSubscriptions(): void {
+    this.getInitialCardTitleState();
+    this.getSiteContent();
+  }
+
+  private getInitialCardTitleState(): void {
+    this.intialCardTitleStateSubscription = this.baseService.intialCardTitleState.subscribe((value: string) => {
+      if (value) {
+        this.title = value
+      }
+    });
+  }
+
+  private getSiteContent(): void {
+    this.getSiteContentSubscription = this.baseService.contentBehavior.subscribe((value: string) => {
+      if (value) {
+        this.siteContent = value
+      }
+    });
   }
   
-  updateTitleAndCards(title: string): void {
-    if (this.siteContent == "series") {
-      title === "now_playing" ? title = "on_the_air" : false;
-      this.baseService.updateTitleAndCards(title);
-    } else {
-      this.baseService.updateTitleAndCards(title);
+  public updateTitleAndCards(title: string): void {
+    if (title) {
+      if (this.siteContent == "series") {
+        title === "now_playing" ? title = "on_the_air" : false;
+        this.baseService.updateTitleAndCards(title);
+      } else {
+        this.baseService.updateTitleAndCards(title);
+      }
     }
+  }
+
+  ngOnDestroy(): void {
+    if (this.intialCardTitleStateSubscription) this.intialCardTitleStateSubscription.unsubscribe();
+    if (this.getSiteContentSubscription) this.getSiteContentSubscription.unsubscribe();
   }
 
 }
