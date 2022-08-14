@@ -3,7 +3,7 @@
       {{ userReview?.author }} <br>
   </div>
   <div class="reviews__description">
-    {{ contentTrimer(userReview?.content)}}
+    {{ trimmedContent }}
     <br>
     <a class="reviews__link" target="_blank" href="{{userReview?.url}}">See more &rarr;</a>
   </div>

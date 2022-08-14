@@ -4,6 +4,7 @@ import { CastService } from 'src/app/services/cast/cast.service';
 import { BaseService } from '../../../services/base/base.service';
 import { Actor } from 'src/app/models/Actor';
 import { Cast } from 'src/app/models/Cast';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-actor-summary',
@@ -11,35 +12,53 @@ import { Cast } from 'src/app/models/Cast';
 })
 export class ActorSummaryComponent implements OnInit {
   
-  siteState: string = "";
-  id: string;
-  actor: Actor;
-  credits: Cast[];
+  private siteState: string = "";
+  private id: string = "";
+
+  public actor: Actor;
+  public credits: Cast[];
+  public gender: string = "";
 
   constructor(
     private route: ActivatedRoute, 
     private castService: CastService,
-    private baseService: BaseService) { }
+    private baseService: BaseService
+  ) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get("id");
+    this.registerSubscriptions();
+  }
 
+  private registerSubscriptions(): void {
+    this.getContentState();
+    this.getActorAndCredits();
+  }
+
+  private getContentState(): void {
     this.baseService.contentState.subscribe((value: string) => {
-      this.siteState = value;
-      this.siteState ? this.getData() : false; 
+      if (value) {
+        this.siteState = value;
+        this.siteState ? this.getActorAndCredits() : false; 
+      }
     });
   }
 
-  getData() : void {
-    this.castService.getActor(this.id).subscribe(actor => this.actor = actor);
-    this.castService.getCredits(this.id).subscribe(credits => {
-      const inMostPopularOrder = credits.cast.sort((a: Cast, b: Cast) => b.popularity - a.popularity);
-      this.credits = inMostPopularOrder;
+  private getActorAndCredits(): void {
+    forkJoin([
+      this.castService.getActor(this.id),
+      this.castService.getCredits(this.id)
+    ]).subscribe(([actor, credits]) => {
+      if (actor && credits && Object.keys(credits).length) {
+        this.actor = actor;
+        this.getGender(actor.gender);
+        const inMostPopularOrder = credits.cast.sort((a: Cast, b: Cast) => b.popularity - a.popularity);
+        this.credits = inMostPopularOrder;
+      }
     });
   }
-
-  getGender(genderCode: number): string {
-    return genderCode === 2 ? "Male" : "Female";
+  
+  private getGender(genderCode: number): void {
+    this.gender = genderCode === 2 ? "Male" : "Female"
   }
-
 }

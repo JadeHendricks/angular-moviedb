@@ -8,14 +8,17 @@ import { Review } from 'src/app/models/Review';
 export class ReviewsComponent implements OnInit {
 
   @Input() userReview: Review;
+  public trimmedContent: string = "";
 
   constructor() { }
-
+  
   ngOnInit(): void {
+    if (this.userReview && this.userReview.content) {
+      this.contentTrimer(this.userReview.content);
+    }
   }
 
-  contentTrimer(copy: string): string {
-    return copy.slice(0, 500) + "...";
+  private contentTrimer(copy: string): void {
+    this.trimmedContent = copy.slice(0, 500) + "...";
   }
-
 }
